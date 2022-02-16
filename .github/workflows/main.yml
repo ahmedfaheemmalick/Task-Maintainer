@@ -21,7 +21,7 @@ jobs:
           node-version: '16'
 
       - name: Creating build of front-end
-        run: cd client && npm run build
+        run: cd client && npm i && npm run build
         
       - name: Deploying to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
