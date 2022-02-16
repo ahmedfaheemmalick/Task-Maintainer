@@ -6,7 +6,12 @@ import Task from './Schema/index.mjs';
 dotenv.config();
 
 const app = express()
-app.use(express.json(), cors(["https://task-maintainer.herokuapp.com/", "http://localhost:3000/"]))
+app.use(
+    express.json(),
+    cors(["https://task-maintainer.herokuapp.com/", "http://localhost:3000/"]),
+    express.urlencoded({ extended: true }),
+    express.static('build/index.html')
+);
 
 app.get("/tasks", async (_req, res) => {
     try {
