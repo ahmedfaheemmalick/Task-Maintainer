@@ -13,7 +13,6 @@ const TaskSchema = new mongoose.Schema({
     },
     completed: {
         type: Boolean,
-        required: [true, 'Please select weather task has completed or not.'],
         default: false,
     },
     createdAt: {

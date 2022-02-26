@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.mjs",
-    "dev": "nodemon index.mjs"
+    "start": "node index.js",
+    "deploy": "cd client && yarn build && cd ..",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

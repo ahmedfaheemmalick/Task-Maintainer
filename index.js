@@ -2,18 +2,15 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from 'cors'
-import Task from './Schema/index.mjs';
+import Task from './Model/index.js';
+
 dotenv.config();
-
 const app = express()
-app.use(
-    express.json(),
-    cors(["https://task-maintainer.herokuapp.com/", "http://localhost:3000/"]),
-    express.urlencoded({ extended: true }),
-    express.static('build/index.html')
-);
 
-app.get("/tasks", async (_req, res) => {
+app.use(express.static("./client/build"), cors(), express.json());
+
+
+app.get("/api/tasks", async (_req, res) => {
     try {
         const tasks = await Task.find({})
         res.status(200).json(tasks)
@@ -22,7 +19,7 @@ app.get("/tasks", async (_req, res) => {
     }
 })
 
-app.get("/task/:id", async (req, res) => {
+app.get("/api/task/:id", async (req, res) => {
     try {
         const task = await Task.findOne({ _id: req.params.id })
         res.status(200).json(task)
@@ -31,16 +28,16 @@ app.get("/task/:id", async (req, res) => {
     }
 })
 
-app.post("/task", async (req, res) => {
+app.post("/api/task", async (req, res) => {
     try {
-        const task = await Task.create(req.body)
+        const task = await Task.create({ ...req.body, createdAt: new Date() })
         res.status(200).json(task)
     } catch (error) {
         res.status(400).json(new Error(error))
     }
 })
 
-app.patch("/task/:id", async (req, res) => {
+app.patch("/api/task/:id", async (req, res) => {
     try {
         const task = await Task.findOneAndUpdate(req.params.id, req.body, {
             new: true, runValidators: true,
@@ -51,7 +48,7 @@ app.patch("/task/:id", async (req, res) => {
     }
 })
 
-app.delete("/task/:id", async (req, res) => {
+app.delete("/api/task/:id", async (req, res) => {
     try {
         const task = await Task.findOneAndDelete(req.params.id)
         res.status(200).json(task)
