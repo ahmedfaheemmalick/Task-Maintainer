@@ -7,7 +7,7 @@ import Task from './Model/index.js';
 dotenv.config();
 const app = express()
 
-app.use(express.static("./Client/build"), cors(), express.json());
+app.use(express.static("./client/build"), cors(), express.json());
 
 
 app.get("/api/tasks", async (_req, res) => {
