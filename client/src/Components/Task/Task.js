@@ -20,7 +20,7 @@ const Task = ({ task, deleteTask }) => {
                 <Link to={`task/${task._id}/update`} className='w-6 mx-2 cursor-pointer'>
                     <img src={edit} alt="Edit Task" />
                 </Link>
-                <button className='w-6 mx-2 cursor-pointer' onClick={() => deleteTask()}>
+                <button className='w-6 mx-2 cursor-pointer' onClick={() => deleteTask(task._id)}>
                     <img src={trash} alt="Delete Task" />
                 </button>
             </div>

@@ -31,7 +31,7 @@ app.get("/api/task/:id", async (req, res) => {
 app.post("/api/task", async (req, res) => {
     try {
         const task = await Task.create({ ...req.body, createdAt: new Date() })
-        res.status(200).json(task)
+        res.status(200).json({ msg: "Task created successfully." })
     } catch (error) {
         res.status(400).json(new Error(error))
     }
@@ -42,7 +42,7 @@ app.patch("/api/task/:id", async (req, res) => {
         const task = await Task.findOneAndUpdate(req.params.id, req.body, {
             new: true, runValidators: true,
         })
-        res.status(200).json(task)
+        res.status(200).json({ msg: "Task updated successfully." })
     } catch (error) {
         res.status(400).json(new Error(error))
     }
@@ -51,7 +51,7 @@ app.patch("/api/task/:id", async (req, res) => {
 app.delete("/api/task/:id", async (req, res) => {
     try {
         const task = await Task.findOneAndDelete(req.params.id)
-        res.status(200).json(task)
+        res.status(200).json({ msg: "Task deleted successfully." })
     } catch (error) {
         res.status(400).json(new Error(error))
     }

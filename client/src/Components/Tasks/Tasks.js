@@ -27,7 +27,7 @@ const Tasks = () => {
     const deleteTask = (id) => {
         axios.delete(`/api/task/${id}`)
             .then(res => {
-                setMsg({ success: res.msg })
+                setMsg({ success: res.data.msg })
                 axios.get('/api/tasks')
                     .then(res => setTasks(res.data))
             })
